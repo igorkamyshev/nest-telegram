@@ -31,4 +31,10 @@ export class TelegramClient {
       parse_mode: 'Markdown',
     })
   }
+  
+  public async getChat(
+    chatId: string | number,
+  ): Promise<void> {
+    await this.telegram.getChat(chatId)
+  }
 }
