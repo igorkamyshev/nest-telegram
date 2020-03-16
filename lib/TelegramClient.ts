@@ -34,7 +34,7 @@ export class TelegramClient {
   
   public async getChat(
     chatId: string | number,
-  ): Promise<void> {
+  ): Promise<any> {
     await this.telegram.getChat(chatId)
   }
 }
