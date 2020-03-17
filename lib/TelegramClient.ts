@@ -3,6 +3,7 @@ const Telegram = require('telegraf/telegram')
 
 import { TokenInjectionToken } from './TokenInjectionToken'
 import { TelegramModuleOptionsFactory } from './TelegramModuleOptionsFactory'
+import { Chat } from 'telegraf/typings/telegram-types'
 
 @Injectable()
 export class TelegramClient {
@@ -30,5 +31,9 @@ export class TelegramClient {
     await this.telegram.sendMessage(chatId, markdown, {
       parse_mode: 'Markdown',
     })
+  }
+
+  public async getChat(chatId: string | number): Promise<Chat> {
+    return this.telegram.getChat(chatId)
   }
 }
