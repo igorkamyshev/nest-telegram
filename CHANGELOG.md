@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.6.0](https://github.com/igorkamyshev/nest-telegram/compare/v0.5.1...v0.6.0) (2020-03-17)
+
+
+### Bug Fixes
+
+* add types declaration ([a9fe321](https://github.com/igorkamyshev/nest-telegram/commit/a9fe321))
+
+
+### Features
+
+* **telegram client:** delete extra files ([adbf9ef](https://github.com/igorkamyshev/nest-telegram/commit/adbf9ef))
+
+
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
 ## [0.5.1](https://github.com/igorkamyshev/nest-telegram/compare/v0.5.0...v0.5.1) (2019-07-26)
 
 
