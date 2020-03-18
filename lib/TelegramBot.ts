@@ -59,6 +59,10 @@ export class TelegramBot {
     return this.bot.webhookCallback(`/${path}`)
   }
 
+  public use(middleware: Middleware<any>) {
+    return this.bot.use(middleware)
+  }
+  
   public startPolling() {
     this.bot.telegram.deleteWebhook().then(
       () => this.bot.startPolling(),
