@@ -9,7 +9,8 @@
   "devDependencies": {
     "@solid-soda/scripts": "^1.2.4",
     "@team-griffin/install-self-peers": "^1.1.1",
-    "@types/lodash": "^4.14.121"
+    "@types/lodash": "^4.14.121",
+    "typescript": "^3.8.3"
   },
   "husky": {
     "hooks": {
@@ -21,7 +22,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rimraf dist && tsc",
+    "build": "tsc",
     "prepare": "install-self-peers -- --ignore-scripts && yarn build",
     "ci": "yarn soda lint",
     "s": "yarn soda"
