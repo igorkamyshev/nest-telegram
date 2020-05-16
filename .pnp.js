@@ -118,6 +118,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "npm:2.0.5"
       ],
       [
+        "rxjs",
+        "npm:6.5.5"
+      ],
+      [
         "standard-version",
         "npm:7.1.0"
       ],
@@ -159,6 +163,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["lint-staged", "npm:10.2.2"],
             ["lodash", "npm:4.17.15"],
             ["prettier", "npm:2.0.5"],
+            ["rxjs", "npm:6.5.5"],
             ["standard-version", "npm:7.1.0"],
             ["telegraf", "npm:3.38.0"],
             ["typescript", "patch:typescript@npm%3A3.9.2#builtin<compat/typescript>::version=3.9.2&hash=8cac75"]
@@ -396,7 +401,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["cli-color", "npm:2.0.0"],
             ["iterare", "npm:1.2.0"],
             ["reflect-metadata", null],
-            ["rxjs", null],
+            ["rxjs", "npm:6.5.5"],
             ["tslib", "npm:1.11.2"],
             ["uuid", "npm:8.0.0"]
           ],
@@ -419,7 +424,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["object-hash", "npm:2.0.3"],
             ["path-to-regexp", "npm:3.2.0"],
             ["reflect-metadata", null],
-            ["rxjs", null],
+            ["rxjs", "npm:6.5.5"],
             ["tslib", "npm:1.11.2"],
             ["uuid", "npm:8.0.0"]
           ],
@@ -5124,6 +5129,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["lint-staged", "npm:10.2.2"],
             ["lodash", "npm:4.17.15"],
             ["prettier", "npm:2.0.5"],
+            ["rxjs", "npm:6.5.5"],
             ["standard-version", "npm:7.1.0"],
             ["telegraf", "npm:3.38.0"],
             ["typescript", "patch:typescript@npm%3A3.9.2#builtin<compat/typescript>::version=3.9.2&hash=8cac75"]

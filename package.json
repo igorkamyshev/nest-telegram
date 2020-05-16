@@ -48,13 +48,13 @@
     "release": "yarn standard-version"
   },
   "peerDependencies": {
-    "reflect-metadata": "^0.1.13",
-    "rxjs": "^6.0"
+    "reflect-metadata": "^0.1.13"
   },
   "dependencies": {
     "@nestjs/common": "^7.0",
     "@nestjs/core": "^7.0",
     "lodash": "^4.17.15",
+    "rxjs": "^6.0",
     "telegraf": "^3.38.0"
   },
   "prettier": {
