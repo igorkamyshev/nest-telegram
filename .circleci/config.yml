@@ -14,14 +14,14 @@ workflows:
               only: /.*/
             tags:
               only: /.*/
-      - yarn-berry/local:
-          name: types
-          command: 'types'
-          filters:
-            branches:
-              only: /.*/
-            tags:
-              only: /.*/
+      # - yarn-berry/local:
+      #     name: types
+      #     command: 'types'
+      #     filters:
+      #       branches:
+      #         only: /.*/
+      #       tags:
+      #         only: /.*/
       - npm/publish:
           npm_token: NPM_TOKEN
           filters:
@@ -31,4 +31,4 @@ workflows:
               only: /.*/
           requires:
             - "eslint"
-            - "types"
+            # - "types"
