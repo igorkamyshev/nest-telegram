@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
-import Telegraf, { Context } from 'telegraf';
+import Telegraf, { Context, Middleware } from 'telegraf';
 import { flatten, head } from 'lodash';
 
 import { ContextTransformer } from './ContextTransformer';
@@ -16,8 +16,9 @@ import { InvalidConfigurationException } from './InvalidConfigurationException';
 @Injectable()
 export class TelegramBot {
   private readonly sitePublicUrl?: string;
-  private readonly bot: Bot;
   private ref: ModuleRef;
+
+  readonly telegrafBot: Bot;
 
   constructor(
     @Inject(TokenInjectionToken) factory: TelegramModuleOptionsFactory,
@@ -25,7 +26,7 @@ export class TelegramBot {
     const { token, sitePublicUrl } = factory.createOptions();
 
     this.sitePublicUrl = sitePublicUrl;
-    this.bot = new Telegraf(token);
+    this.telegrafBot = new Telegraf(token);
   }
 
   init(ref: ModuleRef, usePolling = false) {
@@ -52,16 +53,16 @@ export class TelegramBot {
 
     const url = `${this.sitePublicUrl}/${path}`;
 
-    this.bot.telegram
+    this.telegrafBot.telegram
       .setWebhook(url)
       .then(() => console.log(`Webhook set success @ ${url}`));
 
-    return this.bot.webhookCallback(`/${path}`);
+    return this.telegrafBot.webhookCallback(`/${path}`);
   }
 
   private startPolling() {
-    this.bot.telegram.deleteWebhook().then(
-      () => this.bot.startPolling(),
+    this.telegrafBot.telegram.deleteWebhook().then(
+      () => this.telegrafBot.startPolling(),
       () => {
         // okay, never mind
       },
@@ -92,14 +93,14 @@ export class TelegramBot {
       throw new Error();
     }
 
-    this.bot.start(this.adoptHandle(head(onStart)));
+    this.telegrafBot.start(this.adoptHandle(head(onStart)));
   }
 
   private setupOnMessage(handlers: Handler[]): void {
     const onMessageHandlers = handlers.filter(({ config }) => config.message);
 
     onMessageHandlers.forEach((handler) => {
-      this.bot.hears(handler.config.message, this.adoptHandle(handler));
+      this.telegrafBot.hears(handler.config.message, this.adoptHandle(handler));
     });
   }
 
@@ -107,7 +108,10 @@ export class TelegramBot {
     const commandHandlers = handlers.filter(({ config }) => config.command);
 
     commandHandlers.forEach((handler) => {
-      this.bot.command(handler.config.command, this.adoptHandle(handler));
+      this.telegrafBot.command(
+        handler.config.command,
+        this.adoptHandle(handler),
+      );
     });
   }
 
