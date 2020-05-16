@@ -1,5 +1,5 @@
-import { ContextMessageUpdate } from 'telegraf'
+import { Context } from 'telegraf'
 
 export interface ContextTransformer<T = any> {
-  transform: (ctx: ContextMessageUpdate) => Promise<T>
+  transform: (ctx: Context) => Promise<T>
 }

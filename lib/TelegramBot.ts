@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common'
 import { ModuleRef } from '@nestjs/core'
-import Telegraf, { ContextMessageUpdate } from 'telegraf'
+import Telegraf, { Context } from 'telegraf'
 import { flatten, head } from 'lodash'
 
 import { ContextTransformer } from './ContextTransformer'
@@ -114,7 +114,7 @@ export class TelegramBot {
   private adoptHandle({ handle, config }: Handler) {
     const errorHandler = this.createCatch()
 
-    return async (ctx: ContextMessageUpdate) => {
+    return async (ctx: Context) => {
       const args = await Promise.all(
         (config.transformations || [])
           .sort((a, b) => a.index - b.index)
@@ -143,7 +143,7 @@ export class TelegramBot {
       }
     })
 
-    return (ctx: ContextMessageUpdate) => (e: any) => {
+    return (ctx: Context) => (e: any) => {
       for (const { errorType, handler } of handlers) {
         if (e instanceof (errorType as any)) {
           return handler.catch(ctx, e)

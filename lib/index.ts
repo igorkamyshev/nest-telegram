@@ -12,4 +12,3 @@ export { TelegramCatch } from './decorators/TelegramCatch'
 export { TelegramErrorHandler } from './interfaces/TelegramErrorHandler'
 
 export { ContextTransformer } from './ContextTransformer'
-export { Context } from './Context'

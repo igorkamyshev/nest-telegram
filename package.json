@@ -9,8 +9,9 @@
   "devDependencies": {
     "@solid-soda/scripts": "^1.2.4",
     "@team-griffin/install-self-peers": "^1.1.1",
-    "@types/lodash": "^4.14.121",
-    "typescript": "^3.8.3"
+    "@types/lodash": "^4.14.151",
+    "@types/node": "12",
+    "typescript": "^3.9.2"
   },
   "husky": {
     "hooks": {
@@ -28,12 +29,13 @@
     "s": "yarn soda"
   },
   "peerDependencies": {
-    "@nestjs/common": "^5.7.3",
-    "@nestjs/core": "^5.7.3",
-    "reflect-metadata": "^0.1.13"
+    "@nestjs/common": "^7.0",
+    "@nestjs/core": "^7.0",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^6.0"
   },
   "dependencies": {
-    "lodash": "^4.17.13",
-    "telegraf": "^3.27.1"
+    "lodash": "^4.17.15",
+    "telegraf": "^3.38.0"
   }
 }

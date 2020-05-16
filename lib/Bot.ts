@@ -1,4 +1,3 @@
-import Telegraf from 'telegraf'
-import { Context } from './Context'
+import Telegraf, { Context } from 'telegraf'
 
 export type Bot = Telegraf<Context>
