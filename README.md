@@ -1,10 +1,12 @@
 # nest-telegram
 
+[![Scripts sets up by @solid-soda/scripts v2.1.0](https://img.shields.io/static/v1?label=@solid-soda/scripts&message=2.1.0&color=75ddf4)](https://github.com/solid-soda/scripts)
+
 Integrate [telegraf.js](https://telegraf.js.org/) to [NestJS](https://nestjs.com/) application.
 
 > Warning! Package under development, please waiting for v1 release.
 
-## Instalation 
+## Instalation
 
 `yarn add nest-telegram`
 
@@ -57,24 +59,24 @@ export class MyModule implements NestModule {
 ### Add custom middleware to your app
 
 ```ts
-import { TelegramBot } from 'nest-telegram'
-import { NestFactory } from '@nestjs/core'
-import { AppModule } from '@app/app.module'
+import { TelegramBot } from 'nest-telegram';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from '@app/app.module';
 
 async function bootstrap() {
-  const isDev = process.env.NODE_ENV === 'development'
+  const isDev = process.env.NODE_ENV === 'development';
 
-  const app = await NestFactory.create(AppModule)
+  const app = await NestFactory.create(AppModule);
 
-  const bot = app.get(TelegramBot)
+  const bot = app.get(TelegramBot);
 
   if (!isDev) {
-    app.use(bot.getMiddleware('hook-path'))
+    app.use(bot.getMiddleware('hook-path'));
   }
 
-  await app.listen(3000)
+  await app.listen(3000);
 }
-bootstrap()
+bootstrap();
 ```
 
 ## Usage
@@ -84,23 +86,23 @@ Now, you can decorate any method with `TelegramActionHandler`.
 Example:
 
 ```ts
-import { Injectable } from '@nestjs/common'
-import { Context, PipeContext, TelegramActionHandler } from 'nest-telegram'
+import { Injectable } from '@nestjs/common';
+import { Context, PipeContext, TelegramActionHandler } from 'nest-telegram';
 
 @Injectable()
 export class HelpActions {
   @TelegramActionHandler({ onStart: true })
   async start(ctx: Context) {
-    await ctx.reply('Hello!')
+    await ctx.reply('Hello!');
   }
 }
 ```
 
 Available actions for decorator:
 
-+ `onStart` {boolean}, it triggers on `/start` command.
-+ `command` {string}, it triggers on any command, e.g. — `@TelegramActionHandler({ command: '/help' })`.
-+ `message` {string|RegExp}, it triggers on text message matching RegExp or string.
+- `onStart` {boolean}, it triggers on `/start` command.
+- `command` {string}, it triggers on any command, e.g. — `@TelegramActionHandler({ command: '/help' })`.
+- `message` {string|RegExp}, it triggers on text message matching RegExp or string.
 
 Also, you can write Transformators for context (like Pipes in NestJS). Example:
 
