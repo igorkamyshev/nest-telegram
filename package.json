@@ -1,6 +1,6 @@
 {
   "name": "nest-telegram",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "git@github.com:igorkamyshev/nest-telegram.git",
