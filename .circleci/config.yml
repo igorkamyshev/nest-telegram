@@ -1,0 +1,34 @@
+version: 2.1
+orbs:
+  npm: checkmoney/npm@1.1.0
+  yarn-berry: checkmoney/yarn-berry@1.0.0
+workflows:
+  version: 2
+  build:
+    jobs:
+      - yarn-berry/local:
+          name: eslint
+          command: 'lint:code'
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              only: /.*/
+      - yarn-berry/local:
+          name: types
+          command: 'types'
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              only: /.*/
+      - npm/publish:
+          npm_token: NPM_TOKEN
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /.*/
+          requires:
+            - "eslint"
+            - "types"

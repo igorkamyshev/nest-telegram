@@ -42,6 +42,7 @@
     "prepare": "yarn build",
     "pretty": "yarn prettier --write .",
     "commit": "yarn git-cz",
+    "types": "yarn tsc --noEmit",
     "lint:code": "yarn eslint \"./**/*.{ts,tsx}\"",
     "release": "yarn standard-version"
   },
