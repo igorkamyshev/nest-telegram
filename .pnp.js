@@ -2477,14 +2477,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["once", "npm:1.3.3"]
           ],
           "linkType": "HARD",
-        }],
-        ["npm:1.4.4", {
-          "packageLocation": "./.yarn/cache/end-of-stream-npm-1.4.4-497fc6dee1-3.zip/node_modules/end-of-stream/",
-          "packageDependencies": [
-            ["end-of-stream", "npm:1.4.4"],
-            ["once", "npm:1.4.0"]
-          ],
-          "linkType": "HARD",
         }]
       ]],
       ["enquirer", [
@@ -4814,7 +4806,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["camelcase-keys", "npm:6.2.2"],
             ["decamelize-keys", "npm:1.1.0"],
             ["hard-rejection", "npm:2.1.0"],
-            ["minimist-options", "npm:4.0.2"],
+            ["minimist-options", "npm:4.1.0"],
             ["normalize-package-data", "npm:2.5.0"],
             ["read-pkg-up", "npm:7.0.1"],
             ["redent", "npm:3.0.0"],
@@ -4953,12 +4945,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "HARD",
         }],
-        ["npm:4.0.2", {
-          "packageLocation": "./.yarn/cache/minimist-options-npm-4.0.2-525c573dac-3.zip/node_modules/minimist-options/",
+        ["npm:4.1.0", {
+          "packageLocation": "./.yarn/cache/minimist-options-npm-4.1.0-64ca250fc1-3.zip/node_modules/minimist-options/",
           "packageDependencies": [
-            ["minimist-options", "npm:4.0.2"],
+            ["minimist-options", "npm:4.1.0"],
             ["arrify", "npm:1.0.1"],
-            ["is-plain-obj", "npm:1.1.0"]
+            ["is-plain-obj", "npm:1.1.0"],
+            ["kind-of", "npm:6.0.3"]
           ],
           "linkType": "HARD",
         }]
@@ -5846,7 +5839,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/pump-npm-3.0.0-0080bf6a7a-3.zip/node_modules/pump/",
           "packageDependencies": [
             ["pump", "npm:3.0.0"],
-            ["end-of-stream", "npm:1.4.4"],
+            ["end-of-stream", "npm:1.1.0"],
             ["once", "npm:1.4.0"]
           ],
           "linkType": "HARD",
