@@ -16,6 +16,7 @@ import { InvalidConfigurationException } from './InvalidConfigurationException';
 @Injectable()
 export class TelegramBot {
   private readonly sitePublicUrl?: string;
+
   private ref: ModuleRef;
 
   readonly telegrafBot: Bot;
@@ -90,7 +91,7 @@ export class TelegramBot {
     const onStart = handlers.filter(({ config }) => config.onStart);
 
     if (onStart.length !== 1) {
-      throw new Error();
+      throw new Error('nest-telegram requires exactly one onStart handler');
     }
 
     this.telegrafBot.start(this.adoptHandle(head(onStart)));

@@ -1,6 +1,7 @@
-import { Type } from '@nestjs/common'
-import { ContextTransformer } from '../ContextTransformer'
-import { addHandlerToStore } from './TelegramActionHandler'
+import { Type } from '@nestjs/common';
+
+import { ContextTransformer } from '../ContextTransformer';
+import { addHandlerToStore } from './TelegramActionHandler';
 
 export const PipeContext = <T>(transform: Type<ContextTransformer<T>>) => (
   target: Object,
@@ -14,5 +15,5 @@ export const PipeContext = <T>(transform: Type<ContextTransformer<T>>) => (
         transform,
       },
     ],
-  })
-}
+  });
+};

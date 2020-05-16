@@ -1,14 +1,15 @@
-import { ContextTransformer } from './ContextTransformer'
-import { Type } from '@nestjs/common'
+import { Type } from '@nestjs/common';
+
+import { ContextTransformer } from './ContextTransformer';
 
 interface ArgumentTransformation {
-  index: number
-  transform: Type<ContextTransformer>
+  index: number;
+  transform: Type<ContextTransformer>;
 }
 
 export interface HandleParameters {
-  onStart?: boolean
-  command?: string
-  message?: string | RegExp
-  transformations?: ArgumentTransformation[]
+  onStart?: boolean;
+  command?: string;
+  message?: string | RegExp;
+  transformations?: ArgumentTransformation[];
 }

@@ -1,18 +1,19 @@
-import { Type } from '@nestjs/common'
-import { TelegramErrorHandler } from '../interfaces/TelegramErrorHandler'
+import { Type } from '@nestjs/common';
 
-type Decorator = (error: any) => ClassDecorator
+import { TelegramErrorHandler } from '../interfaces/TelegramErrorHandler';
+
+type Decorator = (error: any) => ClassDecorator;
 
 type HandlerDecorator = Decorator & {
-  handlers?: Map<Error, Type<TelegramErrorHandler>>
-}
+  handlers?: Map<Error, Type<TelegramErrorHandler>>;
+};
 
-export const TelegramCatch: HandlerDecorator = error => target => {
+export const TelegramCatch: HandlerDecorator = (error) => (target) => {
   if (!TelegramCatch.handlers) {
-    TelegramCatch.handlers = new Map()
+    TelegramCatch.handlers = new Map();
   }
 
-  TelegramCatch.handlers.set(error, target as any)
+  TelegramCatch.handlers.set(error, target as any);
 
-  return target
-}
+  return target;
+};
