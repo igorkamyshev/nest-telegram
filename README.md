@@ -44,12 +44,8 @@ export class MyModule implements NestModule {
   onModuleInit() {
     const isDev = process.env.NODE_ENV === 'development'
 
-    this.telegramBot.init(this.moduleRef)
-
-    if (isDev) {
-      // in dev mode, we can't use webhook
-      this.telegramBot.startPolling()
-    }
+    // in dev mode, we can't use webhook, polling starts automatically
+    this.telegramBot.init(this.moduleRef, isDev);
   }
 
   // ...
@@ -71,6 +67,7 @@ async function bootstrap() {
   const bot = app.get(TelegramBot);
 
   if (!isDev) {
+    // in production mode, please use webhook with middleware
     app.use(bot.getMiddleware('hook-path'));
   }
 

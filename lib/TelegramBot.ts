@@ -1,118 +1,118 @@
-import { Injectable, Inject } from '@nestjs/common'
-import { ModuleRef } from '@nestjs/core'
-import Telegraf, { Context } from 'telegraf'
-import { flatten, head } from 'lodash'
+import { Injectable, Inject } from '@nestjs/common';
+import { ModuleRef } from '@nestjs/core';
+import Telegraf, { Context } from 'telegraf';
+import { flatten, head } from 'lodash';
 
-import { ContextTransformer } from './ContextTransformer'
-import { TelegramCatch } from './decorators/TelegramCatch'
-import { TelegramErrorHandler } from './interfaces/TelegramErrorHandler'
-import { Handler } from './Handler'
-import { Bot } from './Bot'
-import { TelegramActionHandler } from './decorators/TelegramActionHandler'
-import { TokenInjectionToken } from './TokenInjectionToken'
-import { TelegramModuleOptionsFactory } from './TelegramModuleOptionsFactory'
-import { InvalidConfigurationException } from './InvalidConfigurationException'
+import { ContextTransformer } from './ContextTransformer';
+import { TelegramCatch } from './decorators/TelegramCatch';
+import { TelegramErrorHandler } from './interfaces/TelegramErrorHandler';
+import { Handler } from './Handler';
+import { Bot } from './Bot';
+import { TelegramActionHandler } from './decorators/TelegramActionHandler';
+import { TokenInjectionToken } from './TokenInjectionToken';
+import { TelegramModuleOptionsFactory } from './TelegramModuleOptionsFactory';
+import { InvalidConfigurationException } from './InvalidConfigurationException';
 
 @Injectable()
 export class TelegramBot {
-  private readonly sitePublicUrl?: string
-  private readonly bot: Bot
-  private ref: ModuleRef
+  private readonly sitePublicUrl?: string;
+  private readonly bot: Bot;
+  private ref: ModuleRef;
 
-  public constructor(
+  constructor(
     @Inject(TokenInjectionToken) factory: TelegramModuleOptionsFactory,
   ) {
-    const { token, sitePublicUrl } = factory.createOptions()
+    const { token, sitePublicUrl } = factory.createOptions();
 
-    this.sitePublicUrl = sitePublicUrl
-    this.bot = new Telegraf(token)
+    this.sitePublicUrl = sitePublicUrl;
+    this.bot = new Telegraf(token);
   }
 
-  public init(ref: ModuleRef, devMode: boolean = false) {
-    this.ref = ref
+  init(ref: ModuleRef, usePolling = false) {
+    this.ref = ref;
 
-    const handlers = this.createHandlers()
+    const handlers = this.createHandlers();
 
-    this.setupOnStart(handlers)
-    this.setupOnMessage(handlers)
-    this.setupOnCommand(handlers)
+    this.setupOnStart(handlers);
+    this.setupOnMessage(handlers);
+    this.setupOnCommand(handlers);
 
-    if (devMode) {
-      this.startPolling()
+    if (usePolling) {
+      this.startPolling();
     }
   }
 
-  public getMiddleware(path: string) {
+  getMiddleware(path: string) {
     if (!this.sitePublicUrl) {
       throw new InvalidConfigurationException(
         'sitePublicUrl',
         'does not exist, but webook used',
-      )
+      );
     }
 
-    const url = `${this.sitePublicUrl}/${path}`
+    const url = `${this.sitePublicUrl}/${path}`;
 
     this.bot.telegram
       .setWebhook(url)
-      .then(() => console.log(`Webhook set success @ ${url}`))
+      .then(() => console.log(`Webhook set success @ ${url}`));
 
-    return this.bot.webhookCallback(`/${path}`)
+    return this.bot.webhookCallback(`/${path}`);
   }
 
-  public startPolling() {
+  private startPolling() {
     this.bot.telegram.deleteWebhook().then(
       () => this.bot.startPolling(),
       () => {
         // okay, never mind
       },
-    )
+    );
   }
 
   private createHandlers(): Handler[] {
     return flatten(
       Array.from((TelegramActionHandler.handlers || new Map()).entries()).map(
         ([handlerClass, classConfig]) => {
-          const handlerInstance = this.ref.get(handlerClass, { strict: false })
+          const handlerInstance = this.ref.get(handlerClass, { strict: false });
 
           return Array.from(classConfig.entries()).map(
             ([methodName, methodCondig]) => ({
               handle: handlerInstance[methodName].bind(handlerInstance),
               config: methodCondig,
             }),
-          )
+          );
         },
       ),
-    )
+    );
   }
 
   private setupOnStart(handlers: Handler[]): void {
-    const onStart = handlers.filter(({ config }) => config.onStart)
+    const onStart = handlers.filter(({ config }) => config.onStart);
 
     if (onStart.length !== 1) {
-      throw new Error()
+      throw new Error();
     }
 
-    this.bot.start(this.adoptHandle(head(onStart)))
+    this.bot.start(this.adoptHandle(head(onStart)));
   }
 
   private setupOnMessage(handlers: Handler[]): void {
-    const onMessageHandlers = handlers.filter(({ config }) => config.message)
+    const onMessageHandlers = handlers.filter(({ config }) => config.message);
 
-    onMessageHandlers.forEach(handler => {
-      this.bot.hears(handler.config.message, this.adoptHandle(handler))
-    })
+    onMessageHandlers.forEach((handler) => {
+      this.bot.hears(handler.config.message, this.adoptHandle(handler));
+    });
   }
 
   private setupOnCommand(handlers: Handler[]): void {
-    const commandHandlers = handlers.filter(({ config }) => config.command)
+    const commandHandlers = handlers.filter(({ config }) => config.command);
 
-    commandHandlers.forEach(handler => {
-      this.bot.command(handler.config.command, this.adoptHandle(handler))
-    })
+    commandHandlers.forEach((handler) => {
+      this.bot.command(handler.config.command, this.adoptHandle(handler));
+    });
   }
 
   private adoptHandle({ handle, config }: Handler) {
-    const errorHandler = this.createCatch()
+    const errorHandler = this.createCatch();
 
     return async (ctx: Context) => {
       const args = await Promise.all(
@@ -123,10 +123,10 @@ export class TelegramBot {
               .get<ContextTransformer>(transform, { strict: false })
               .transform(ctx),
           ),
-      )
+      );
 
-      return handle(ctx, ...args).catch(errorHandler(ctx))
-    }
+      return handle(ctx, ...args).catch(errorHandler(ctx));
+    };
   }
 
   private createCatch() {
@@ -135,22 +135,22 @@ export class TelegramBot {
     ).map(([errorType, handlerType]) => {
       const handler = this.ref.get<TelegramErrorHandler>(handlerType, {
         strict: false,
-      })
+      });
 
       return {
         errorType,
         handler,
-      }
-    })
+      };
+    });
 
     return (ctx: Context) => (e: any) => {
       for (const { errorType, handler } of handlers) {
         if (e instanceof (errorType as any)) {
-          return handler.catch(ctx, e)
+          return handler.catch(ctx, e);
         }
       }
 
-      throw e
-    }
+      throw e;
+    };
   }
 }
