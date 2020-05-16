@@ -1,11 +1,11 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { ModuleRef } from '@nestjs/core';
+import { Injectable, Inject, Type } from '@nestjs/common';
 import Telegraf, { Context } from 'telegraf';
 import { flatten, head } from 'lodash';
 
 import { ContextTransformer } from './ContextTransformer';
 import { TelegramCatch } from './decorators/TelegramCatch';
 import { TelegramErrorHandler } from './interfaces/TelegramErrorHandler';
+import { ServiceProvider } from './interfaces/ServiceProvider';
 import { Handler } from './Handler';
 import { Bot } from './Bot';
 import { TelegramActionHandler } from './decorators/TelegramActionHandler';
@@ -17,7 +17,7 @@ import { InvalidConfigurationException } from './InvalidConfigurationException';
 export class TelegramBot {
   private readonly sitePublicUrl?: string;
 
-  private ref: ModuleRef;
+  private ref: ServiceProvider;
 
   readonly telegrafBot: Bot;
 
@@ -30,7 +30,7 @@ export class TelegramBot {
     this.telegrafBot = new Telegraf(token);
   }
 
-  init(ref: ModuleRef, usePolling = false) {
+  init(ref: ServiceProvider, usePolling = false) {
     this.ref = ref;
 
     const handlers = this.createHandlers();
