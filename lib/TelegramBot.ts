@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
-import Telegraf, { Context, Middleware } from 'telegraf';
+import Telegraf, { Context } from 'telegraf';
 import { flatten, head } from 'lodash';
 
 import { ContextTransformer } from './ContextTransformer';
