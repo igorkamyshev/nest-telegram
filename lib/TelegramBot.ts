@@ -1,4 +1,5 @@
-import { Injectable, Inject, Type } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
+import { UpdateType, MessageSubTypes } from 'telegraf/typings/telegram-types';
 import Telegraf, { Context } from 'telegraf';
 import { flatten, head } from 'lodash';
 
@@ -41,6 +42,7 @@ export class TelegramBot {
     this.setupOnStart(handlers);
     this.setupOnMessage(handlers);
     this.setupOnCommand(handlers);
+    this.setupOnLocation(handlers);
 
     if (this.usePolling) {
       this.startPolling();
@@ -123,6 +125,21 @@ export class TelegramBot {
         handler.config.command,
         this.adoptHandle(handler),
       );
+    });
+  }
+
+  private setupOnLocation(handlers: Handler[]): void {
+    const locationHandlers = handlers.filter(({ config }) => config.location);
+
+    this.setupOnAnyUpdateType(['location'], locationHandlers);
+  }
+
+  private setupOnAnyUpdateType(
+    updateTypes: UpdateType[] | MessageSubTypes[],
+    handlers: Handler[],
+  ): void {
+    handlers.forEach((handler) => {
+      this.telegrafBot.on(updateTypes, this.adoptHandle(handler));
     });
   }
 
