@@ -11,5 +11,6 @@ export interface HandleParameters {
   onStart?: boolean;
   command?: string;
   message?: string | RegExp;
+  location?: boolean;
   transformations?: ArgumentTransformation[];
 }
