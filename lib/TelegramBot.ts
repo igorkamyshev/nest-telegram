@@ -16,6 +16,7 @@ import { InvalidConfigurationException } from './InvalidConfigurationException';
 @Injectable()
 export class TelegramBot {
   private readonly sitePublicUrl?: string;
+
   private readonly usePolling: boolean;
 
   private ref: ServiceProvider;
