@@ -16,6 +16,7 @@ import { InvalidConfigurationException } from './InvalidConfigurationException';
 @Injectable()
 export class TelegramBot {
   private readonly sitePublicUrl?: string;
+  private readonly usePolling: boolean;
 
   private ref: ServiceProvider;
 
@@ -24,13 +25,14 @@ export class TelegramBot {
   constructor(
     @Inject(TokenInjectionToken) factory: TelegramModuleOptionsFactory,
   ) {
-    const { token, sitePublicUrl } = factory.createOptions();
+    const { token, sitePublicUrl, usePolling } = factory.createOptions();
 
     this.sitePublicUrl = sitePublicUrl;
+    this.usePolling = Boolean(usePolling);
     this.telegrafBot = new Telegraf(token);
   }
 
-  init(ref: ServiceProvider, usePolling = false) {
+  init(ref: ServiceProvider) {
     this.ref = ref;
 
     const handlers = this.createHandlers();
@@ -39,7 +41,7 @@ export class TelegramBot {
     this.setupOnMessage(handlers);
     this.setupOnCommand(handlers);
 
-    if (usePolling) {
+    if (this.usePolling) {
       this.startPolling();
     }
   }
@@ -49,6 +51,13 @@ export class TelegramBot {
       throw new InvalidConfigurationException(
         'sitePublicUrl',
         'does not exist, but webook used',
+      );
+    }
+
+    if (this.usePolling) {
+      throw new InvalidConfigurationException(
+        'usePolling',
+        'passed, but middleware required',
       );
     }
 
