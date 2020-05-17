@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.7](https://github.com/igorkamyshev/nest-telegram/compare/v0.6.6...v0.6.7) (2020-05-17)
+
+### Bug Fixes
+
+- add miss Context export ([a0de451](https://github.com/igorkamyshev/nest-telegram/commit/a0de4513603ea9ed805e8a65b1a9e5502bfc7fb9))
+- add miss implementation of location handler ([6805516](https://github.com/igorkamyshev/nest-telegram/commit/68055166d599252761a19938480f7b2fb2188799))
+
 ### [0.6.6](https://github.com/igorkamyshev/nest-telegram/compare/v0.6.5...v0.6.6) (2020-05-17)
 
 ### Features
