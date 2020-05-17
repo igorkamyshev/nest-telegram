@@ -101,6 +101,7 @@ Available actions for decorator:
 - `onStart` {boolean}, it triggers on `/start` command.
 - `command` {string}, it triggers on any command, e.g. — `@TelegramActionHandler({ command: '/help' })`.
 - `message` {string|RegExp}, it triggers on text message matching RegExp or string.
+- `location` {boolean}, it triggers on location send.
 
 Also, you can write Transformators for context (like Pipes in NestJS). Example:
 
