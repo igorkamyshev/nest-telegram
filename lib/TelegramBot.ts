@@ -42,7 +42,7 @@ export class TelegramBot {
     this.setupOnStart(handlers);
     this.setupOnMessage(handlers);
     this.setupOnCommand(handlers);
-    this.setupOnLocation(handlers);
+    this.setupOnAnyUpdateType(handlers);
 
     if (this.usePolling) {
       this.startPolling();
@@ -128,19 +128,12 @@ export class TelegramBot {
     });
   }
 
-  private setupOnLocation(handlers: Handler[]): void {
-    const locationHandlers = handlers.filter(({ config }) => config.location);
-
-    this.setupOnAnyUpdateType(['location'], locationHandlers);
-  }
-
-  private setupOnAnyUpdateType(
-    updateTypes: UpdateType[] | MessageSubTypes[],
-    handlers: Handler[],
-  ): void {
-    handlers.forEach((handler) => {
-      this.telegrafBot.on(updateTypes, this.adoptHandle(handler));
-    });
+  private setupOnAnyUpdateType(handlers: Handler[]): void {
+    handlers
+      .filter((handler) => handler.config.on)
+      .forEach((handler) => {
+        this.telegrafBot.on(handler.config.on, this.adoptHandle(handler));
+      });
   }
 
   private adoptHandle({ handle, config }: Handler) {
