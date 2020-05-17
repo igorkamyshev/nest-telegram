@@ -3,17 +3,17 @@ import {
   Module,
   NestModule,
   DynamicModule,
-} from '@nestjs/common'
-import { ModuleMetadata, Type } from '@nestjs/common/interfaces'
+} from '@nestjs/common';
+import { ModuleMetadata, Type } from '@nestjs/common/interfaces';
 
-import { TelegramBot } from './TelegramBot'
-import { TelegramModuleOptionsFactory } from './TelegramModuleOptionsFactory'
-import { TokenInjectionToken } from './TokenInjectionToken'
-import { TelegramClient } from './TelegramClient'
+import { TelegramBot } from './TelegramBot';
+import { TelegramModuleOptionsFactory } from './TelegramModuleOptionsFactory';
+import { TokenInjectionToken } from './TokenInjectionToken';
+import { TelegramClient } from './TelegramClient';
 
 interface TelegramFactory extends Pick<ModuleMetadata, 'imports'> {
-  useClass?: Type<TelegramModuleOptionsFactory>
-  inject?: any[]
+  useClass?: Type<TelegramModuleOptionsFactory>;
+  inject?: any[];
 }
 
 @Module({})
@@ -24,6 +24,7 @@ export class TelegramModule implements NestModule {
 
   static fromFactory(factory: TelegramFactory): DynamicModule {
     return {
+      imports: factory.imports,
       module: TelegramModule,
       providers: [
         TelegramBot,
@@ -34,6 +35,6 @@ export class TelegramModule implements NestModule {
         },
       ],
       exports: [TelegramBot, TelegramClient],
-    }
+    };
   }
 }
