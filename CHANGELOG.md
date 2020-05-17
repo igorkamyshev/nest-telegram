@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.6](https://github.com/igorkamyshev/nest-telegram/compare/v0.6.5...v0.6.6) (2020-05-17)
+
+### Features
+
+- add location as trigger ([5c12cf4](https://github.com/igorkamyshev/nest-telegram/commit/5c12cf49213ec2f484c0b8457410bfa725d63ecd))
+
 ### [0.6.5](https://github.com/igorkamyshev/nest-telegram/compare/v0.6.4...v0.6.5) (2020-05-17)
 
 ### [0.6.4](https://github.com/igorkamyshev/nest-telegram/compare/v0.6.3...v0.6.4) (2020-05-17)
