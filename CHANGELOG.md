@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.8](https://github.com/igorkamyshev/nest-telegram/compare/v0.6.7...v0.6.8) (2020-05-17)
+
+### Features
+
+- add support any update/message type ([26bc4b9](https://github.com/igorkamyshev/nest-telegram/commit/26bc4b95da6f0dcdad2bbc6e1bd7c6ce152d2243))
+
 ### [0.6.7](https://github.com/igorkamyshev/nest-telegram/compare/v0.6.6...v0.6.7) (2020-05-17)
 
 ### Bug Fixes
