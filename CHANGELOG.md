@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.3](https://github.com/igorkamyshev/nest-telegram/compare/v0.6.2...v0.6.3) (2020-05-17)
+
+### Bug Fixes
+
+- add miss module imports ([dc9e99c](https://github.com/igorkamyshev/nest-telegram/commit/dc9e99cf9fe403bcf3a1a94d56c3c96727608ff9))
+
 ### [0.6.2](https://github.com/igorkamyshev/nest-telegram/compare/v0.6.1...v0.6.2) (2020-05-16)
 
 ### [0.6.1](https://github.com/igorkamyshev/nest-telegram/compare/v0.6.0...v0.6.1) (2020-05-16)
