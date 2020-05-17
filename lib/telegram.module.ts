@@ -13,7 +13,6 @@ import { TelegramClient } from './TelegramClient';
 
 interface TelegramFactory extends Pick<ModuleMetadata, 'imports'> {
   useClass?: Type<TelegramModuleOptionsFactory>;
-  inject?: any[];
 }
 
 @Module({})
@@ -22,7 +21,7 @@ export class TelegramModule implements NestModule {
     // pass
   }
 
-  static fromFactory(factory: TelegramFactory): DynamicModule {
+  static forRootAsync(factory: TelegramFactory): DynamicModule {
     return {
       imports: factory.imports,
       module: TelegramModule,

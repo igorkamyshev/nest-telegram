@@ -29,7 +29,8 @@ class TelegramOptionsFactory implements TelegramModuleOptionsFactory {
 
 @Module({
   imports: [
-    TelegramModule.fromFactory({,
+    TelegramModule.forRootAsync({,
+      imports: [/* all modules for initialize TelegramOptionsFactory*/]
       useClass: TelegramOptionsFactory,
     }),
     UtilsModule,
