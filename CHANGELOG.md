@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.9](https://github.com/igorkamyshev/nest-telegram/compare/v0.6.8...v0.6.9) (2020-06-07)
+
+### Features
+
+- add options to telegram send message ([9df841e](https://github.com/igorkamyshev/nest-telegram/commit/9df841e8d6a94c0f0db1e0e19500a06e5fe1a4ca))
+
 ### [0.6.8](https://github.com/igorkamyshev/nest-telegram/compare/v0.6.7...v0.6.8) (2020-05-17)
 
 ### Features
