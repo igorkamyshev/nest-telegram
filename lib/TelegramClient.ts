@@ -22,7 +22,7 @@ export class TelegramClient {
   public async sendMessage(
     chatId: string | number,
     text: string,
-    options: object,
+    options?: object,
   ): Promise<void> {
     await this.telegram.sendMessage(chatId, text, options);
   }
@@ -30,7 +30,7 @@ export class TelegramClient {
   public async sendMarkdown(
     chatId: string | number,
     markdown: string,
-    options: object,
+    options?: object,
   ): Promise<void> {
     await this.telegram.sendMessage(
       chatId,
